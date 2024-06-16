@@ -9,7 +9,6 @@ const port = 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
-app.use(express.static('public')); // Sirve archivos estáticos desde la carpeta 'public'
 
 const db = mysql.createConnection({
     host: 'localhost',
