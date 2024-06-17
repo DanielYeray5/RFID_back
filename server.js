@@ -11,13 +11,12 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root', 
-    password: 'danielyeray5',
-    database: 'rfid_db'
+    host: 'bhlasd80eymuwk9wtkdp-mysql.services.clever-cloud.com',
+    user: 'udcxvrboirbc5kbt', 
+    password: 'iXsJc2feC8scBTOhp3Vu',
+    database: 'bhlasd80eymuwk9wtkdp'
 });
 
-// Conexión a la base de datos
 db.connect((err) => {
     if (err) {
         throw err;
@@ -25,10 +24,8 @@ db.connect((err) => {
     console.log('Conectado a la base de datos MySQL');
 });
 
-// Ruta para el registro de usuario
-// Ruta para el registro de usuario
 app.post('/registro', (req, res) => {
-    const { nombreUsuario, rfid, correo, contraseña } = req.body; // Agregamos contraseña aquí
+    const { nombreUsuario, rfid, correo, contraseña } = req.body; 
     const checkSql = 'SELECT * FROM usuarios WHERE rfid = ? OR nombre = ?';
     db.query(checkSql, [rfid, nombreUsuario], (err, results) => {
         if (err) {
@@ -50,8 +47,6 @@ app.post('/registro', (req, res) => {
     });
 });
 
-
-// Ruta para iniciar sesión
 app.post('/iniciarSesion', (req, res) => {
     const { rfid, nombreUsuario } = req.body;
     const sql = 'SELECT * FROM usuarios WHERE rfid = ? AND nombre = ?';
@@ -67,7 +62,6 @@ app.post('/iniciarSesion', (req, res) => {
     });
 });
 
-// Inicia el servidor
 app.listen(port, () => {
     console.log(`Servidor iniciado en http://localhost:${port}`);
 });
